@@ -54,7 +54,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     fetchAutoCompleteData();
   }
@@ -87,14 +86,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         (context, Function(String) onSelected, options) {
                       return Scaffold(
                         body: Container(
-                          // alignment: Alignment.topLeft,
                           alignment: Alignment.center,
                           height: options.length > 2
                               ? MediaQuery.of(context).size.height * 0.22
                               : options.length * 55,
-                          // color: Colors.red,
                           width: MediaQuery.of(context).size.width * 0.92,
-                          // color: Colors.red,
                           child: Card(
                             elevation: 4,
                             child: RawScrollbar(
@@ -103,13 +99,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: ScrollConfiguration(
                                 behavior: EliminateScrollRippleEffect(),
                                 child: ListView.separated(
-                                  // physics: NeverScrollableScrollPhysics(),
-                                  // shrinkWrap: true,
                                   padding: EdgeInsets.zero,
-                                  // padding: EdgeInsets.zero,
                                   itemBuilder: (context, index) {
                                     final option = options.elementAt(index);
-
                                     return GestureDetector(
                                       onTap: () {
                                         onSelected(option.toString());
@@ -117,7 +109,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                       child: Container(
                                         height: 40,
                                         alignment: Alignment.centerLeft,
-                                        // color: Colors.orange,
                                         padding: EdgeInsets.only(left: 8),
                                         child: SubstringHighlight(
                                           text: option.toString(),
@@ -125,8 +116,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                           textAlign: TextAlign.start,
                                           textStyleHighlight: TextStyle(
                                               fontWeight: FontWeight.w700),
-
-                                          // subtitle: Text("This is subtitle"),
                                         ),
                                       ),
                                     );
@@ -171,11 +160,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     },
                   ),
-                  // Container(
-                  //   color: Colors.red,
-                  //   width: 300,
-                  //   height: 400,
-                  // )
                 ],
               ),
             ),
