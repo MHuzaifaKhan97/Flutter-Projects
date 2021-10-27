@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late List<String> autoCompleteData;
 
   late TextEditingController controller;
-
+  bool isListEmpty = false;
   Future fetchAutoCompleteData() async {
     setState(() {
       isLoading = true;
@@ -75,11 +75,25 @@ class _HomeScreenState extends State<HomeScreen> {
                   Autocomplete(
                     optionsBuilder: (TextEditingValue textEditingValue) {
                       if (textEditingValue.text.isEmpty) {
-                        return const Iterable<String>.empty();
+                        return Iterable<String>.empty();
                       } else {
-                        return autoCompleteData.where((word) => word
-                            .toLowerCase()
-                            .contains(textEditingValue.text.toLowerCase()));
+                        List<String> result = autoCompleteData
+                            .where((word) => word
+                                .toLowerCase()
+                                .contains(textEditingValue.text.toLowerCase()))
+                            .toList();
+                        if (result.isNotEmpty) {
+                          setState(() {
+                            isListEmpty = false;
+                          });
+                          return result;
+                        } else {
+                          setState(() {
+                            isListEmpty = true;
+                          });
+                          result.first = "No Search Result Found";
+                          return result;
+                        }
                       }
                     },
                     optionsViewBuilder:
@@ -89,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           alignment: Alignment.center,
                           height: options.length > 2
                               ? MediaQuery.of(context).size.height * 0.22
-                              : options.length * 55,
+                              : 55,
                           width: MediaQuery.of(context).size.width * 0.92,
                           child: Card(
                             elevation: 4,
@@ -102,23 +116,37 @@ class _HomeScreenState extends State<HomeScreen> {
                                   padding: EdgeInsets.zero,
                                   itemBuilder: (context, index) {
                                     final option = options.elementAt(index);
-                                    return GestureDetector(
-                                      onTap: () {
-                                        onSelected(option.toString());
-                                      },
-                                      child: Container(
-                                        height: 40,
-                                        alignment: Alignment.centerLeft,
-                                        padding: EdgeInsets.only(left: 8),
-                                        child: SubstringHighlight(
-                                          text: option.toString(),
-                                          term: controller.text,
-                                          textAlign: TextAlign.start,
-                                          textStyleHighlight: TextStyle(
-                                              fontWeight: FontWeight.w700),
-                                        ),
-                                      ),
-                                    );
+                                    return isListEmpty
+                                        ? Container(
+                                            height: 40,
+                                            alignment: Alignment.centerLeft,
+                                            padding: EdgeInsets.only(left: 8),
+                                            child: SubstringHighlight(
+                                              text: 'No Search Result Found',
+                                              term: controller.text,
+                                              textAlign: TextAlign.start,
+                                              textStyleHighlight: TextStyle(
+                                                  fontWeight: FontWeight.w700),
+                                            ),
+                                          )
+                                        : GestureDetector(
+                                            onTap: () {
+                                              onSelected(option.toString());
+                                            },
+                                            child: Container(
+                                              height: 40,
+                                              alignment: Alignment.centerLeft,
+                                              padding: EdgeInsets.only(left: 8),
+                                              child: SubstringHighlight(
+                                                text: option.toString(),
+                                                term: controller.text,
+                                                textAlign: TextAlign.start,
+                                                textStyleHighlight: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.w700),
+                                              ),
+                                            ),
+                                          );
                                   },
                                   separatorBuilder: (context, index) =>
                                       Divider(),
