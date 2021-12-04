@@ -1,4 +1,4 @@
-name: flutter_stripe_example
+name: flutter_square
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -28,8 +28,10 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  flutter_stripe: ^1.0.2
-  http:
+  square_in_app_payments: ^1.7.1
+  http: ^0.13.1
+  uuid: ^3.0.3
+
 
 dev_dependencies:
   flutter_test:
