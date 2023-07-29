@@ -1,5 +1,7 @@
 import 'package:ecomerce_app_ui/services/grocery_service.dart';
+import 'package:ecomerce_app_ui/ui/screens/checkout_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CartScreen extends StatelessWidget {
@@ -283,6 +285,7 @@ class CartScreen extends StatelessWidget {
                     //   MaterialPageRoute(
                     //       builder: (context) => const CheckoutScreenView()),
                     // );
+                    Get.to(() => CheckoutScreen());
                   },
                   child: const Text("Save"),
                 ),
