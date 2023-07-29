@@ -1,5 +1,7 @@
 import 'package:ecomerce_app_ui/services/grocery_service.dart';
+import 'package:ecomerce_app_ui/ui/screens/product_detail_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -305,13 +307,16 @@ class HomeScreen extends StatelessWidget {
                           double totalDiscount = item['price'] - discount;
                           return InkWell(
                             onTap: () {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //       builder: (context) => DetailProductView(
-                              //             item: item,
-                              //           )),
-                              // );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ProductDetailScreen(
+                                          item: item,
+                                        )),
+                              );
+                              // Get.to(ProductDetailScreen(
+                              //   item: item,
+                              // ));
                             },
                             child: Container(
                               margin:
