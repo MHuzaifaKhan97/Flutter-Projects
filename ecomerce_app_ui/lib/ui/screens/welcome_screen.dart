@@ -1,4 +1,5 @@
 import 'package:ecomerce_app_ui/controllers/welcome_controller.dart';
+import 'package:ecomerce_app_ui/ui/screens/registration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -202,12 +203,12 @@ class WelcomeScreen extends StatelessWidget {
                                     ),
                                     InkWell(
                                       onTap: () {
-                                        // Navigator.pushReplacement(
-                                        //   context,
-                                        //   MaterialPageRoute(
-                                        //       builder: (context) =>
-                                        //           const RegisterView()),
-                                        // );
+                                        Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const RegistrationScreen()),
+                                        );
                                       },
                                       child: Text(
                                         " Sign Up",
