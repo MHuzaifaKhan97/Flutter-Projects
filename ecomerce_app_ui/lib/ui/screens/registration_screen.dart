@@ -1,5 +1,7 @@
+import 'package:ecomerce_app_ui/ui/screens/home_screen.dart';
 import 'package:ecomerce_app_ui/ui/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class RegistrationScreen extends StatelessWidget {
@@ -186,12 +188,7 @@ class RegistrationScreen extends StatelessWidget {
                                   ),
                                 ),
                                 onPressed: () {
-                                  // Navigator.pushReplacement(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //       builder: (context) =>
-                                  //           const HomeScreenView()),
-                                  // );
+                                  Get.to(const HomeScreen());
                                 },
                                 child: Text(
                                   "Sign Up",
