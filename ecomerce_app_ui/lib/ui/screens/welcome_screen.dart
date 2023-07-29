@@ -1,9 +1,11 @@
+import 'package:ecomerce_app_ui/controllers/welcome_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({super.key});
-
+  WelcomeScreen({super.key});
+  WelcomeController _welcomeController = Get.put(WelcomeController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -132,11 +134,16 @@ class WelcomeScreen extends StatelessWidget {
                               ),
                               child: Row(
                                 children: [
-                                  Radio(
-                                    value: 0,
-                                    groupValue: 1,
-                                    onChanged: (value) {},
-                                  ),
+                                  Obx(() {
+                                    return Checkbox(
+                                      value: _welcomeController.isRemeber.value,
+                                      onChanged: (value) {
+                                        print(value);
+                                        _welcomeController
+                                            .changeIsRemember(value as bool);
+                                      },
+                                    );
+                                  }),
                                   Text("Remember me",
                                       style: GoogleFonts.poppins(
                                           fontSize: 12,
