@@ -203,11 +203,8 @@ class WelcomeScreen extends StatelessWidget {
                                     ),
                                     InkWell(
                                       onTap: () {
-                                        Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const RegistrationScreen()),
+                                        Get.offAll(
+                                          const RegistrationScreen(),
                                         );
                                       },
                                       child: Text(

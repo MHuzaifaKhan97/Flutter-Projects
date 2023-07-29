@@ -1,4 +1,5 @@
 import 'package:ecomerce_app_ui/ui/screens/home_screen.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 
@@ -51,7 +52,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         ),
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            Get.back();
           },
           icon: const Icon(
             Icons.arrow_back,
@@ -506,14 +507,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                               ),
                                             ),
                                             onPressed: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const HomeScreen()),
-                                              );
+                                              Get.offAll(
+                                                  () => const HomeScreen());
                                             },
-                                            child: const Text("oke")),
+                                            child: const Text("Okay")),
                                       ),
                                     ],
                                   ),

@@ -307,16 +307,9 @@ class HomeScreen extends StatelessWidget {
                           double totalDiscount = item['price'] - discount;
                           return InkWell(
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ProductDetailScreen(
-                                          item: item,
-                                        )),
-                              );
-                              // Get.to(ProductDetailScreen(
-                              //   item: item,
-                              // ));
+                              Get.to(ProductDetailScreen(
+                                item: item,
+                              ));
                             },
                             child: Container(
                               margin:

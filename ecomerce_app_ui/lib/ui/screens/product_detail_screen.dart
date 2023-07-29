@@ -524,12 +524,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   ),
                 ),
                 onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //       builder: (context) => const CardScreenView()),
-                  // );
-                  Get.to(CartScreen());
+                  Get.to(() => const CartScreen());
                 },
                 child: const Text("Add to cart"),
               ),

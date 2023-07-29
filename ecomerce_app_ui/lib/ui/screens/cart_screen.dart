@@ -24,7 +24,7 @@ class CartScreen extends StatelessWidget {
         ),
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            Get.back();
           },
           icon: const Icon(
             Icons.arrow_back,
@@ -280,12 +280,7 @@ class CartScreen extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //       builder: (context) => const CheckoutScreenView()),
-                    // );
-                    Get.to(() => CheckoutScreen());
+                    Get.to(() => const CheckoutScreen());
                   },
                   child: const Text("Save"),
                 ),

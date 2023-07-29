@@ -221,12 +221,7 @@ class RegistrationScreen extends StatelessWidget {
                                   ),
                                   InkWell(
                                     onTap: () {
-                                      Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                WelcomeScreen()),
-                                      );
+                                      Get.offAll(WelcomeScreen());
                                     },
                                     child: Text(
                                       " Sign In",
