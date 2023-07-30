@@ -1,4 +1,5 @@
 import 'package:ecomerce_app_ui/controllers/welcome_controller.dart';
+import 'package:ecomerce_app_ui/ui/screens/home_screen.dart';
 import 'package:ecomerce_app_ui/ui/screens/registration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -173,7 +174,9 @@ class WelcomeScreen extends StatelessWidget {
                                         BorderRadius.circular(50), // <-- Radius
                                   ),
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Get.offAll(() => const HomeScreen());
+                                },
                                 child: Text(
                                   "Sign In",
                                   style: GoogleFonts.poppins(

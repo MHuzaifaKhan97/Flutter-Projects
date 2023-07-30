@@ -22,14 +22,14 @@ class HomeScreen extends StatelessWidget {
           style: GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 14),
         ),
         actions: [
-          const Icon(
-            Icons.message,
-            size: 24.0,
-            color: Colors.white,
-          ),
-          const SizedBox(
-            width: 23.0,
-          ),
+          // const Icon(
+          //   Icons.message,
+          //   size: 24.0,
+          //   color: Colors.white,
+          // ),
+          // const SizedBox(
+          //   width: 23.0,
+          // ),
           Stack(
             children: const [
               Align(
@@ -80,6 +80,19 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+          const SizedBox(
+            width: 23.0,
+          ),
+          GestureDetector(
+            onTap: () {
+              Get.back();
+            },
+            child: const Icon(
+              Icons.logout,
+              size: 26.0,
+              color: Colors.white,
+            ),
           ),
           const SizedBox(
             width: 23.0,
@@ -184,11 +197,11 @@ class HomeScreen extends StatelessWidget {
                       height: 19.26,
                     ),
                     SizedBox(
-                      height: 80.0,
+                      height: 100.0,
                       width: MediaQuery.of(context).size.width,
                       child: Center(
                         child: SizedBox(
-                          height: 80.0,
+                          height: 100.0,
                           child: ListView.builder(
                             itemCount: GroceryServices.menuCategory.length,
                             scrollDirection: Axis.horizontal,
@@ -196,17 +209,17 @@ class HomeScreen extends StatelessWidget {
                               var item = GroceryServices.menuCategory[index];
                               return Container(
                                 margin: const EdgeInsets.only(
-                                  left: 22.27,
+                                  left: 22.0,
                                 ),
                                 child: Column(
                                   children: [
                                     CircleAvatar(
-                                      radius: 25,
+                                      radius: 35,
                                       backgroundColor: Colors.white,
                                       child: Image.asset(
                                         "${item['image']}",
-                                        width: 30.0,
-                                        height: 30.0,
+                                        width: 35.0,
+                                        height: 35.0,
                                         fit: BoxFit.fitHeight,
                                       ),
                                     ),

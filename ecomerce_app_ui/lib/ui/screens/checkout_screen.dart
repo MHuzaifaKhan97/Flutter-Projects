@@ -523,7 +523,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     );
                   },
                   child: (isLoading != false)
-                      ? const CircularProgressIndicator()
+                      ? const CircularProgressIndicator(
+                          color: Color(0xff06AB8D),
+                        )
                       : const Text("Continue")),
             ),
           ],

@@ -1,3 +1,4 @@
+import 'package:ecomerce_app_ui/controllers/product_controller.dart';
 import 'package:ecomerce_app_ui/ui/screens/cart_screen.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,6 +13,7 @@ class ProductDetailScreen extends StatefulWidget {
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
+  ProductController _productController = Get.put(ProductController());
   var selected = 0;
   Map item = {
     "photo":
@@ -43,10 +45,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         elevation: 0,
         backgroundColor: Colors.white,
         title: const Text("Dashboard"),
-        leading: const Icon(
-          Icons.arrow_back,
-          size: 24.0,
-          color: Colors.black,
+        leading: GestureDetector(
+          onTap: () {
+            Get.back();
+          },
+          child: const Icon(
+            Icons.arrow_back,
+            size: 24.0,
+            color: Colors.black,
+          ),
         ),
         actions: [
           const Icon(
@@ -445,67 +452,78 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         ),
         child: Row(
           children: [
-            Container(
+            SizedBox(
               height: 27.0,
               width: 88,
-              decoration: const BoxDecoration(),
               child: Row(
                 children: [
-                  Container(
-                    width: 27.51,
-                    height: 27.51,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(
-                          9.0,
+                  GestureDetector(
+                    onTap: () {
+                      _productController.onCountDecrement();
+                    },
+                    child: Container(
+                      width: 27.51,
+                      height: 27.51,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(
+                            9.0,
+                          ),
+                        ),
+                        border: Border.all(
+                          width: 1.0,
+                          color: const Color(0xffC0C8C7),
                         ),
                       ),
-                      border: Border.all(
-                        width: 1.0,
-                        color: const Color(0xffC0C8C7),
-                      ),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        "-",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                      child: const Center(
+                        child: Text(
+                          "-",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    width: 27.51,
-                    height: 27.51,
-                    child: Center(
-                      child: Text(
-                        "1",
-                        style: TextStyle(fontSize: 12),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: 27.51,
-                    height: 27.51,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(
-                          9.0,
+                  Obx(() {
+                    return SizedBox(
+                      width: 27.51,
+                      height: 27.51,
+                      child: Center(
+                        child: Text(
+                          _productController.checkoutItemCount.value.toString(),
+                          style: const TextStyle(fontSize: 12),
                         ),
                       ),
-                      border: Border.all(
-                        width: 1.0,
-                        color: const Color(0xffC0C8C7),
+                    );
+                  }),
+                  GestureDetector(
+                    onTap: () {
+                      _productController.onCountIncrement();
+                    },
+                    child: Container(
+                      width: 27.51,
+                      height: 27.51,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(
+                            9.0,
+                          ),
+                        ),
+                        border: Border.all(
+                          width: 1.0,
+                          color: const Color(0xffC0C8C7),
+                        ),
                       ),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        "+",
-                        style: TextStyle(color: Colors.black, fontSize: 20),
+                      child: const Center(
+                        child: Text(
+                          "+",
+                          style: TextStyle(color: Colors.black, fontSize: 20),
+                        ),
                       ),
                     ),
                   ),
