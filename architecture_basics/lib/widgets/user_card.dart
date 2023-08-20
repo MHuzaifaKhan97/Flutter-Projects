@@ -1,9 +1,9 @@
-import 'package:architecture_basics/user_json.dart';
+import 'package:architecture_basics/domain/entities/user.dart';
 import 'package:flutter/material.dart';
 
 class UserCard extends StatelessWidget {
   const UserCard({super.key, required this.user});
-  final UserJson user;
+  final User user;
   @override
   Widget build(BuildContext context) {
     return Container(
