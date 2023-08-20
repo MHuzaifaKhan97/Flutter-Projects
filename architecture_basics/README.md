@@ -1,6 +1,8 @@
 # Architecture Basics
 
-## Session 01: Code Refactoring, Adding Cubit etc.
+## Session 01:
+### - Code Refactoring
+### - Adding Cubit
 ## Session 02: 
 ### - Bloc Brief Introduction
 ### - Visual Representation of architecture
