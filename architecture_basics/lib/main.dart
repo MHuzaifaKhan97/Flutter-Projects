@@ -1,12 +1,21 @@
-import 'package:architecture_basics/user_list_page.dart';
-import 'package:architecture_basics/user_page_cubit.dart';
+import 'package:architecture_basics/domain/repository/user_repository.dart';
+import 'package:architecture_basics/ui/user_list/user_list_page.dart';
+import 'package:architecture_basics/ui/user_list/user_page_cubit.dart';
+import 'package:architecture_basics/data/rest_api_user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+
+final getIt = GetIt.instance;
 
 void main() {
+  getIt.registerSingleton<UserRepository>(RestApiUserRepository());
   runApp(MultiBlocProvider(
     providers: [
-      BlocProvider(create: (context) => UserListCubit()..fetchUsers()),
+      BlocProvider(
+          create: (context) => UserListCubit(
+                getIt(),
+              )..fetchUsers()),
     ],
     child: const MyApp(),
   ));
@@ -18,7 +27,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Architecture basic',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
