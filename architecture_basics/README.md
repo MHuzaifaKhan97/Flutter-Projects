@@ -1,16 +1,12 @@
-# architecture_basics
+# Architecture Basics
 
-A new Flutter project.
+## Session 01: Code Refactoring, Adding Cubit etc.
+## Session 02: 
+### - Bloc Brief Introduction
+### - Visual Representation of architecture
+### - Refactoring API calls to seperate repository
+### - Dependency Injection & GetIt
+### - Split Json model into Entity & Json class
+### - Create domain and data Layer
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
