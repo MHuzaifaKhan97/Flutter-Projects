@@ -1,6 +1,5 @@
 # Flutter Projects:                   
   
-### - Bottom Sheet Animation.
-### - AutoSearch TextField Example.
-### - And More.
+### - E-Commerce App UI
+### - Architecture basics (Cubit)
   
