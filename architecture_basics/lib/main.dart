@@ -1,11 +1,15 @@
-import 'dart:convert';
-
-import 'package:architecture_basics/user_json.dart';
+import 'package:architecture_basics/user_list_page.dart';
+import 'package:architecture_basics/user_page_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiBlocProvider(
+    providers: [
+      BlocProvider(create: (context) => UserListCubit()..fetchUsers()),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -18,70 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomeScreen(),
-    );
-  }
-}
-
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  final List<UserJson> users = [];
-
-  _fetchUsers() async {
-    var url = Uri.parse("https://jsonplaceholder.typicode.com/users");
-    var response = await http.get(url);
-
-    var list = jsonDecode(response.body) as List;
-    users.addAll(list.map((e) => UserJson.fromJson(e)).toList());
-    setState(() {});
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _fetchUsers();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("App Architecture Basics"),
-      ),
-      body: Center(
-        child: ListView(
-            padding: const EdgeInsets.only(top: 8),
-            children: users
-                .map(
-                  (user) => Container(
-                    margin:
-                        const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade400,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: ListTile(
-                      title: Text(user.name ?? ""),
-                      subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(user.email ?? ""),
-                            Text(user.phone ?? ""),
-                            Text(user.website ?? ""),
-                          ]),
-                      leading: CircleAvatar(child: Text(user.name![0])),
-                    ),
-                  ),
-                )
-                .toList()),
-      ),
+      home: const UsersListPage(),
     );
   }
 }
