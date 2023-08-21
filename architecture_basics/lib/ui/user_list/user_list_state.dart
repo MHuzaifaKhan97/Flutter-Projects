@@ -8,7 +8,7 @@ class UserListState {
       {required this.users, required this.isLoading, this.error});
 
   // factory constructor helps to return value from constructor
-  factory UserListState.empty() =>
+  factory UserListState.initial() =>
       const UserListState(users: [], isLoading: false);
 
   UserListState copyWith({List<User>? users, bool? isLoading, String? error}) =>

@@ -1,4 +1,6 @@
 import 'package:architecture_basics/domain/repository/user_repository.dart';
+import 'package:architecture_basics/ui/user_details/user_details_cubit.dart';
+import 'package:architecture_basics/ui/user_list/user_list_initial_params.dart';
 import 'package:architecture_basics/ui/user_list/user_list_page.dart';
 import 'package:architecture_basics/ui/user_list/user_page_cubit.dart';
 import 'package:architecture_basics/data/rest_api_user_repository.dart';
@@ -16,6 +18,9 @@ void main() {
           create: (context) => UserListCubit(
                 getIt(),
               )..fetchUsers()),
+      BlocProvider(
+        create: (context) => UserDetailsCubit(),
+      ),
     ],
     child: const MyApp(),
   ));
@@ -32,7 +37,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const UsersListPage(),
+      home: const UsersListPage(
+        initialParams: UserListInitialParams(),
+      ),
     );
   }
 }

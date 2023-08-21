@@ -16,6 +16,14 @@ class User extends Equatable {
       this.username,
       this.phone});
 
+  User.empty()
+      : id = 000,
+        name = "",
+        email = "",
+        username = "",
+        phone = "",
+        website = "";
+
   // On basis of props object compares
   @override
   List<Object?> get props => [

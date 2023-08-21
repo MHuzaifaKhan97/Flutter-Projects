@@ -1,0 +1,3 @@
+class UserListInitialParams {
+  const UserListInitialParams();
+}
