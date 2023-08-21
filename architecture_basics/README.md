@@ -10,5 +10,14 @@
 ### - Dependency Injection & GetIt
 ### - Split Json model into Entity & Json class
 ### - Create domain and data Layer
+## Session 03: 
+### - Dartz package
+### - Using Either to handle returns
+### - Exception Handling using left and right from darts
+### - Adding Failure classes to clean up code
+### - Using Test Driven Approach:
+###     - Write only that much code which produces errors
+###     - Write only that much code which removes/fixes errors
+###     - Refactor/ cleanup
 
 
