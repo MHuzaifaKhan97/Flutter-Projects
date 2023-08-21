@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class UserListCubit extends Cubit<UserListState> {
   final UserRepository userRepository;
   // Dependency Injection
-  UserListCubit(this.userRepository) : super(UserListState.empty());
+  UserListCubit(this.userRepository) : super(UserListState.initial());
   Future<void> fetchUsers() async {
     emit(state.copyWith(isLoading: true, error: null));
     final userResponse = await userRepository.getUsers();
