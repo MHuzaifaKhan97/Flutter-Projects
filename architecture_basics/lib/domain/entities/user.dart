@@ -1,4 +1,6 @@
-class User {
+import 'package:equatable/equatable.dart';
+
+class User extends Equatable {
   int? id;
   String? name;
   String? website;
@@ -13,4 +15,15 @@ class User {
       this.email,
       this.username,
       this.phone});
+
+  // On basis of props object compares
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+        username,
+        email,
+        phone,
+        website,
+      ];
 }

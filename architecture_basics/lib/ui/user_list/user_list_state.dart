@@ -3,12 +3,17 @@ import 'package:architecture_basics/domain/entities/user.dart';
 class UserListState {
   final List<User> users;
   final bool isLoading;
-  const UserListState({required this.users, required this.isLoading});
+  final String? error;
+  const UserListState(
+      {required this.users, required this.isLoading, this.error});
 
   // factory constructor helps to return value from constructor
   factory UserListState.empty() =>
       const UserListState(users: [], isLoading: false);
 
-  UserListState copyWith({List<User>? users, bool? isLoading}) => UserListState(
-      users: users ?? this.users, isLoading: isLoading ?? this.isLoading);
+  UserListState copyWith({List<User>? users, bool? isLoading, String? error}) =>
+      UserListState(
+          users: users ?? this.users,
+          isLoading: isLoading ?? this.isLoading,
+          error: error ?? this.error);
 }
