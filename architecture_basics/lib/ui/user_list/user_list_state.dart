@@ -1,7 +1,7 @@
-import 'package:architecture_basics/user_json.dart';
+import 'package:architecture_basics/domain/entities/user.dart';
 
 class UserListState {
-  final List<UserJson> users;
+  final List<User> users;
   final bool isLoading;
   const UserListState({required this.users, required this.isLoading});
 
@@ -9,7 +9,6 @@ class UserListState {
   factory UserListState.empty() =>
       const UserListState(users: [], isLoading: false);
 
-  UserListState copyWith({List<UserJson>? users, bool? isLoading}) =>
-      UserListState(
-          users: users ?? this.users, isLoading: isLoading ?? this.isLoading);
+  UserListState copyWith({List<User>? users, bool? isLoading}) => UserListState(
+      users: users ?? this.users, isLoading: isLoading ?? this.isLoading);
 }

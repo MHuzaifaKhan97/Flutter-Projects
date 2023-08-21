@@ -1,9 +1,8 @@
-import 'package:architecture_basics/user_list_state.dart';
-import 'package:architecture_basics/user_page_cubit.dart';
-import 'package:architecture_basics/widgets/user_card.dart';
+import 'package:architecture_basics/ui/user_list/user_list_state.dart';
+import 'package:architecture_basics/ui/widgets/user_card.dart';
 import 'package:flutter/material.dart';
-import 'package:architecture_basics/user_json.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:architecture_basics/ui/user_list/user_page_cubit.dart';
 
 class UsersListPage extends StatefulWidget {
   const UsersListPage({super.key});
@@ -25,7 +24,7 @@ class _UsersListPageState extends State<UsersListPage> {
         title: const Text("App Architecture Basics"),
       ),
       body: Center(
-        child: BlocBuilder<UserListCubit, UserListState>(
+        child: BlocBuilder(
           bloc: BlocProvider.of<UserListCubit>(context),
           builder: (context, state) {
             final userState = state as UserListState;

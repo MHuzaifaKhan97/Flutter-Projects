@@ -1,3 +1,5 @@
+import 'package:architecture_basics/domain/entities/user.dart';
+
 class UserJson {
   int? id;
   String? name;
@@ -24,13 +26,21 @@ class UserJson {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['website'] = this.website;
-    data['email'] = this.email;
-    data['username'] = this.username;
-    data['phone'] = this.phone;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['website'] = website;
+    data['email'] = email;
+    data['username'] = username;
+    data['phone'] = phone;
     return data;
   }
+
+  User toDomain() => User(
+      id: id,
+      name: name,
+      email: email,
+      phone: phone,
+      website: website,
+      username: username);
 }
