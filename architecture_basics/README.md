@@ -19,5 +19,7 @@
 ###     - Write only that much code which produces errors
 ###     - Write only that much code which removes/fixes errors
 ###     - Refactor/ cleanup
-
+## Session 3.5: 
+### - Initial Params
+### - Empty Constructor
 
