@@ -16,9 +16,13 @@ class UsersListPage extends StatefulWidget {
 }
 
 class _UsersListPageState extends State<UsersListPage> {
+  late UserListCubit userListCubit;
   @override
   void initState() {
     super.initState();
+    userListCubit = BlocProvider.of<UserListCubit>(context);
+    //TODO: improve this
+    userListCubit.userListNavigator.context = context;
   }
 
   @override
@@ -29,7 +33,7 @@ class _UsersListPageState extends State<UsersListPage> {
       ),
       body: Center(
         child: BlocBuilder(
-          bloc: BlocProvider.of<UserListCubit>(context),
+          bloc: userListCubit,
           builder: (context, state) {
             final userState = state as UserListState;
             return userState.isLoading
@@ -37,14 +41,13 @@ class _UsersListPageState extends State<UsersListPage> {
                 : ListView(
                     padding: const EdgeInsets.only(top: 8),
                     children: userState.users
-                        .map((user) => UserCard(
-                            user: user,
-                            onTap: () => Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (_) => UserDetailsPage(
-                                        initialParams: UserDetailsInitialParams(
-                                            user: user))))))
-                        .toList());
+                        .map(
+                          (user) => UserCard(
+                              user: user,
+                              onTap: () => userListCubit.onTapUser(user)),
+                        )
+                        .toList(),
+                  );
           },
         ),
       ),

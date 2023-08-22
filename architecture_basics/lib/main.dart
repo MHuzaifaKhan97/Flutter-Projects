@@ -1,6 +1,8 @@
 import 'package:architecture_basics/domain/repository/user_repository.dart';
+import 'package:architecture_basics/navigation/app_navigator.dart';
 import 'package:architecture_basics/ui/user_details/user_details_cubit.dart';
 import 'package:architecture_basics/ui/user_list/user_list_initial_params.dart';
+import 'package:architecture_basics/ui/user_list/user_list_navigator.dart';
 import 'package:architecture_basics/ui/user_list/user_list_page.dart';
 import 'package:architecture_basics/ui/user_list/user_page_cubit.dart';
 import 'package:architecture_basics/data/rest_api_user_repository.dart';
@@ -12,12 +14,16 @@ final getIt = GetIt.instance;
 
 void main() {
   getIt.registerSingleton<UserRepository>(RestApiUserRepository());
+  getIt.registerSingleton<AppNavigator>(AppNavigator());
+  getIt.registerSingleton<UserListNavigator>(UserListNavigator(getIt()));
   runApp(MultiBlocProvider(
     providers: [
       BlocProvider(
-          create: (context) => UserListCubit(
-                getIt(),
-              )..fetchUsers()),
+        create: (context) => UserListCubit(
+          getIt(),
+          getIt(),
+        )..fetchUsers(),
+      ),
       BlocProvider(
         create: (context) => UserDetailsCubit(),
       ),
