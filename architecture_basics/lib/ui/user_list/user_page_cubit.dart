@@ -1,6 +1,7 @@
 import 'package:architecture_basics/domain/entities/user.dart';
 import 'package:architecture_basics/domain/repository/user_repository.dart';
 import 'package:architecture_basics/ui/user_details/user_details_initial_params.dart';
+import 'package:architecture_basics/ui/user_list/user_list_initial_params.dart';
 import 'package:architecture_basics/ui/user_list/user_list_navigator.dart';
 import 'package:architecture_basics/ui/user_list/user_list_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,8 +9,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class UserListCubit extends Cubit<UserListState> {
   final UserRepository userRepository;
   final UserListNavigator userListNavigator;
+  final UserListInitialParams initialParams;
   // Dependency Injection
-  UserListCubit(this.userRepository, this.userListNavigator)
+  UserListCubit(this.userRepository, this.userListNavigator, this.initialParams)
       : super(UserListState.initial());
   Future<void> fetchUsers() async {
     emit(state.copyWith(isLoading: true, error: null));

@@ -1,6 +1,7 @@
 import 'package:architecture_basics/domain/repository/user_repository.dart';
 import 'package:architecture_basics/navigation/app_navigator.dart';
 import 'package:architecture_basics/ui/user_details/user_details_cubit.dart';
+import 'package:architecture_basics/ui/user_details/user_details_initial_params.dart';
 import 'package:architecture_basics/ui/user_list/user_list_initial_params.dart';
 import 'package:architecture_basics/ui/user_list/user_list_navigator.dart';
 import 'package:architecture_basics/ui/user_list/user_list_page.dart';
@@ -16,20 +17,27 @@ void main() {
   getIt.registerSingleton<UserRepository>(RestApiUserRepository());
   getIt.registerSingleton<AppNavigator>(AppNavigator());
   getIt.registerSingleton<UserListNavigator>(UserListNavigator(getIt()));
-  runApp(MultiBlocProvider(
-    providers: [
-      BlocProvider(
-        create: (context) => UserListCubit(
-          getIt(),
-          getIt(),
-        )..fetchUsers(),
-      ),
-      BlocProvider(
-        create: (context) => UserDetailsCubit(),
-      ),
-    ],
-    child: const MyApp(),
-  ));
+  getIt.registerFactoryParam<UserListCubit, UserListInitialParams, dynamic>(
+      (params, _) => UserListCubit(getIt(), getIt(), params)..fetchUsers());
+
+  getIt.registerFactoryParam<UserDetailsCubit, UserDetailsInitialParams,
+      dynamic>((params, _) => UserDetailsCubit(params));
+
+  // runApp(MultiBlocProvider(
+  //   providers: [
+  // BlocProvider(
+  //   create: (context) => UserListCubit(
+  //     getIt(),
+  //     getIt(),
+  //   )..fetchUsers(),
+  // ),
+  // BlocProvider(
+  //   create: (context) => UserDetailsCubit(),
+  // ),
+  // ],
+  // child: const MyApp(),
+  // ));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -43,9 +51,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const UsersListPage(
-        initialParams: UserListInitialParams(),
-      ),
+      home: UsersListPage(cubit: getIt(param1: const UserListInitialParams())),
     );
   }
 }

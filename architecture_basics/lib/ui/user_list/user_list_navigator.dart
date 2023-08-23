@@ -1,3 +1,4 @@
+import 'package:architecture_basics/main.dart';
 import 'package:architecture_basics/navigation/app_navigator.dart';
 import 'package:architecture_basics/ui/user_details/user_details_navigator.dart';
 import 'package:architecture_basics/ui/user_list/user_list_initial_params.dart';
@@ -15,7 +16,11 @@ class UserListNavigator with UserDetailRoute {
 
 mixin UserListRoute {
   openUserListPage(UserListInitialParams initialParams) {
-    navigator.push(context, UsersListPage(initialParams: initialParams));
+    navigator.push(
+        context,
+        UsersListPage(
+          cubit: getIt(param1: initialParams),
+        ));
   }
 
   AppNavigator get navigator;

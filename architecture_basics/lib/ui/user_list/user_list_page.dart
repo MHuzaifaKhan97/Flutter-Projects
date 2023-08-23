@@ -1,6 +1,3 @@
-import 'package:architecture_basics/ui/user_details/user_details_initial_params.dart';
-import 'package:architecture_basics/ui/user_details/user_details_page.dart';
-import 'package:architecture_basics/ui/user_list/user_list_initial_params.dart';
 import 'package:architecture_basics/ui/user_list/user_list_state.dart';
 import 'package:architecture_basics/ui/widgets/user_card.dart';
 import 'package:flutter/material.dart';
@@ -8,19 +5,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:architecture_basics/ui/user_list/user_page_cubit.dart';
 
 class UsersListPage extends StatefulWidget {
-  final UserListInitialParams initialParams;
-  const UsersListPage({super.key, required this.initialParams});
+  final UserListCubit cubit;
+  const UsersListPage({super.key, required this.cubit});
 
   @override
   State<UsersListPage> createState() => _UsersListPageState();
 }
 
 class _UsersListPageState extends State<UsersListPage> {
-  late UserListCubit userListCubit;
+  UserListCubit get userListCubit => widget.cubit;
   @override
   void initState() {
     super.initState();
-    userListCubit = BlocProvider.of<UserListCubit>(context);
     //TODO: improve this
     userListCubit.userListNavigator.context = context;
   }
