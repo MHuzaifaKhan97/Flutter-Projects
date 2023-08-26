@@ -1,0 +1,3 @@
+class TaskListInitialParams {
+  const TaskListInitialParams();
+}

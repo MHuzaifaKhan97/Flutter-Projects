@@ -3,16 +3,17 @@ const TASK = require('../model/task');
 module.exports = {
     getTasks: async (req, res, next) => {
         const tasks = await TASK.find();
-        res.json({
-            result: tasks.map((res) => {
-                return {
-                    id: res.id,
-                    task_name: res.task_name,
-                    task_description: res.task_description,
-                }
-            })
+        let taskList = [];
+        tasks.map((res) => {
+            
+          taskList.push({
+            id: res.id,
+            task_name: res.task_name,
+            task_description: res.task_description,
+        });
         })
-        console.log(tasks);
+
+        res.json(taskList)
     },
     insertTask: async (req, res) => {
         console.log(req.body);
