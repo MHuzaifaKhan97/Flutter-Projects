@@ -20,6 +20,7 @@ class _TaskAddScreenState extends State<TaskAddScreen> {
   void initState() {
     super.initState();
     taskAddCubit.taskkAddNavigator.context = context;
+    taskAddCubit.onEditInit();
   }
 
   @override
@@ -27,7 +28,9 @@ class _TaskAddScreenState extends State<TaskAddScreen> {
     return Scaffold(
       appBar: AppBar(
           backgroundColor: AppTheme.primaryColor,
-          title: const Text("Add Task")),
+          title: taskAddCubit.initialParams.isEdit
+              ? const Text("Update Task")
+              : const Text("Add Task")),
       body: Center(
           child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
@@ -67,12 +70,16 @@ class _TaskAddScreenState extends State<TaskAddScreen> {
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             backgroundColor: AppTheme.primaryColor),
-                        onPressed: () => taskAddCubit.onTapAddTask(),
+                        onPressed: () => taskAddCubit.initialParams.isEdit
+                            ? taskAddCubit.onTapEditTask()
+                            : taskAddCubit.onTapAddTask(),
                         child: taskAddCubit.state.isLoading
                             ? CircularProgressIndicator(
                                 color: AppTheme.colorWhite,
                               )
-                            : const Text("Add Task"))
+                            : taskAddCubit.initialParams.isEdit
+                                ? const Text("Edit Task")
+                                : const Text("Add Task"))
                   ]),
             );
           },

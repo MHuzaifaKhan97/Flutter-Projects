@@ -21,12 +21,6 @@ class _TaskDetailScreenState extends State<TaskDetailScreen> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-    taskDetailCubit.close();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return BlocBuilder(
       bloc: taskDetailCubit,

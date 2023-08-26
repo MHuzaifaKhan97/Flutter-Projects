@@ -7,10 +7,12 @@ class TaskCard extends StatelessWidget {
       {super.key,
       required this.task,
       required this.onTap,
+      required this.onEdit,
       required this.onDelete});
   final TaskModel task;
   final VoidCallback onTap;
   final VoidCallback onDelete;
+  final VoidCallback onEdit;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -35,9 +37,18 @@ class TaskCard extends StatelessWidget {
           // leading: CircleAvatar(
           //     backgroundColor: AppTheme.primaryColor,
           //     child: Text(task.taskname![0])),
-          trailing: InkWell(
-            onTap: onDelete,
-            child: const Icon(Icons.delete),
+          trailing: Column(
+            children: [
+              InkWell(
+                onTap: onEdit,
+                child: const Icon(Icons.edit),
+              ),
+              const SizedBox(height: 8),
+              InkWell(
+                onTap: onDelete,
+                child: const Icon(Icons.delete),
+              ),
+            ],
           ),
         ),
       ),

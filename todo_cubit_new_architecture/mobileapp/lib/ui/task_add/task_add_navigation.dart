@@ -8,6 +8,9 @@ class TaskkAddNavigator with TaskAddRoute {
 
   @override
   final AppNavigator navigator;
+  goBack() {
+    navigator.pop(context);
+  }
 }
 
 mixin TaskAddRoute {

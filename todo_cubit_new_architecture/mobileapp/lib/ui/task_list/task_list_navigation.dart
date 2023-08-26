@@ -21,10 +21,20 @@ mixin TaskListRoute {
         context,
         TaskDetailScreen(
           cubit: getIt(param1: initialParams),
-        ));
+        ),
+        callback: () {});
   }
 
   openTaskAddPage(TaskAddInitialParams initialParams, VoidCallback callback) {
+    navigator.push(
+        context,
+        TaskAddScreen(
+          cubit: getIt(param1: initialParams),
+        ),
+        callback: callback);
+  }
+
+  openTaskEditPage(TaskAddInitialParams initialParams, VoidCallback callback) {
     navigator.push(
         context,
         TaskAddScreen(

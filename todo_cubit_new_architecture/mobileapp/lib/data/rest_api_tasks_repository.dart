@@ -3,6 +3,7 @@ import 'package:mobileapp/data/task_json.dart';
 import 'package:mobileapp/domain/entities/task.dart';
 import 'package:mobileapp/domain/failure/task_add_failure.dart';
 import 'package:mobileapp/domain/failure/task_delete_failure.dart';
+import 'package:mobileapp/domain/failure/task_edit_failure.dart';
 import 'package:mobileapp/domain/failure/task_list_failure.dart';
 import 'package:mobileapp/domain/repository/task_repository.dart';
 import 'package:mobileapp/network/network_repository.dart';
@@ -35,4 +36,13 @@ class RestApiTaskRepository implements TaskRepository {
         "task_description": description,
       }).then((value) => value.fold(
           (l) => left(TasAddFailure(error: l.error)), (r) => right(r)));
+
+  @override
+  Future<Either<TasEditFailure, dynamic>> editTask(
+          String title, String description, String taskId) =>
+      _networkRepository.put("${Paths.baseURL}/$taskId", {
+        "task_name": title,
+        "task_description": description,
+      }).then((value) => value.fold(
+          (l) => left(TasEditFailure(error: l.error)), (r) => right(r)));
 }

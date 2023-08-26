@@ -25,15 +25,16 @@ class TaskListCubit extends Cubit<TaskListState> {
   }
 
   Future<void> deleteTask(String taskId) async {
-    emit(state.copyWith(isLoading: true, error: null));
+    emit(state.copyWith(isLoading: true, isTaskDeleted: false, error: null));
     final taskReponse = await taskRepository.deleteTask(taskId);
     state.tasks.removeWhere((element) => element.id == taskId);
     taskReponse.fold(
-        (l) => emit(state.copyWith(error: l.error, isLoading: false)),
-        (r) => emit(state.copyWith(
-              isLoading: false,
-              isTaskDeleted: true,
-            )));
+      (l) => emit(state.copyWith(error: l.error, isLoading: false)),
+      (r) => emit(state.copyWith(
+        isLoading: false,
+        isTaskDeleted: true,
+      )),
+    );
   }
 
   onTapTask(TaskModel task) {
@@ -43,5 +44,10 @@ class TaskListCubit extends Cubit<TaskListState> {
 
   onTapAddTask() {
     taskListNavigator.openTaskAddPage(const TaskAddInitialParams(), fetchTasks);
+  }
+
+  onTapEditTask(TaskModel task) {
+    taskListNavigator.openTaskEditPage(
+        TaskAddInitialParams(isEdit: true, task: task), fetchTasks);
   }
 }

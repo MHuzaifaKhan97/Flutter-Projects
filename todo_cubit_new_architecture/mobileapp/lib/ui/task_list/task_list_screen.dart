@@ -24,12 +24,6 @@ class _TaskListScreenState extends State<TaskListScreen> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-    taskListCubit.close();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -66,6 +60,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
                               (task) => TaskCard(
                                 task: task,
                                 onTap: () => taskListCubit.onTapTask(task),
+                                onEdit: () => taskListCubit.onTapEditTask(task),
                                 onDelete: () =>
                                     taskListCubit.deleteTask(task.id ?? ""),
                               ),

@@ -24,8 +24,34 @@ class TaskAddCubit extends Cubit<TaskAddState> {
     }
   }
 
+  onTapEditTask() {
+    if (addTaskFormKey.currentState?.validate() ?? false) {
+      editTask();
+    }
+  }
+
+  onEditInit() {
+    if (initialParams.isEdit) {
+      titleController.text = initialParams.task?.taskname ?? "";
+      descController.text = initialParams.task?.taskdescription ?? "";
+    }
+  }
+
+  Future<void> editTask() async {
+    emit(state.copyWith(isLoading: true, isTaskEdited: false, error: null));
+    final taskReponse = await taskRepository.editTask(titleController.text,
+        descController.text, initialParams.task?.id ?? "");
+    taskReponse.fold(
+        (l) => emit(state.copyWith(error: l.error, isLoading: false)), (r) {
+      emit(state.copyWith(isLoading: false, isTaskEdited: true));
+      titleController.clear();
+      descController.clear();
+      navigateback();
+    });
+  }
+
   Future<void> addTask() async {
-    emit(state.copyWith(isLoading: true, error: null));
+    emit(state.copyWith(isLoading: true, isTaskAdded: false, error: null));
     final taskReponse =
         await taskRepository.addTask(titleController.text, descController.text);
     taskReponse.fold(
@@ -38,6 +64,7 @@ class TaskAddCubit extends Cubit<TaskAddState> {
   }
 
   navigateback() async {
+    await taskkAddNavigator.goBack();
     await taskListCubit.fetchTasks();
   }
 }
