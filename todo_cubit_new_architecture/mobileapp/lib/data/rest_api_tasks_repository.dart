@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:mobileapp/data/task_delete_json.dart';
 import 'package:mobileapp/data/task_json.dart';
 import 'package:mobileapp/domain/entities/task.dart';
 import 'package:mobileapp/domain/failure/task_add_failure.dart';
@@ -23,10 +22,10 @@ class RestApiTaskRepository implements TaskRepository {
                 list.map((e) => TaskJson.fromJson(e).toDomain()).toList());
           }));
   @override
-  Future<Either<TaskDeleteFailure, TaskDeleteJson>> deleteTask(String taskId) =>
+  Future<Either<TaskDeleteFailure, dynamic>> deleteTask(String taskId) =>
       _networkRepository.delete('${Paths.baseURL}/$taskId').then((value) =>
-          value.fold((l) => left(TaskDeleteFailure(error: l.error)),
-              (r) => right(TaskDeleteJson.fromJson(r))));
+          value.fold(
+              (l) => left(TaskDeleteFailure(error: l.error)), (r) => right(r)));
 
   @override
   Future<Either<TasAddFailure, dynamic>> addTask(
