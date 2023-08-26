@@ -38,7 +38,6 @@ class TaskAddCubit extends Cubit<TaskAddState> {
   }
 
   navigateback() async {
-    await taskkAddNavigator.goBack();
     await taskListCubit.fetchTasks();
   }
 }
