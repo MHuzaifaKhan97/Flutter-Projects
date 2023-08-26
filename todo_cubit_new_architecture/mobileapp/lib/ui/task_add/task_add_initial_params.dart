@@ -1,0 +1,3 @@
+class TaskAddInitialParams {
+  const TaskAddInitialParams();
+}

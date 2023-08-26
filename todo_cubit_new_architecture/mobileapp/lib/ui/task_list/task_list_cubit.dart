@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobileapp/domain/entities/task.dart';
 import 'package:mobileapp/domain/repository/task_repository.dart';
+import 'package:mobileapp/ui/task_add/task_add_initial_params.dart';
 import 'package:mobileapp/ui/task_detail/task_detail_initial_params.dart';
 import 'package:mobileapp/ui/task_list/task_list_initial_params.dart';
 import 'package:mobileapp/ui/task_list/task_list_navigation.dart';
@@ -37,6 +38,10 @@ class TaskListCubit extends Cubit<TaskListState> {
 
   onTapTask(TaskModel task) {
     taskListNavigator
-        .openTaskDetailtPage(TaskDetailIntialParams(taskModel: task));
+        .openTaskDetailPage(TaskDetailIntialParams(taskModel: task));
+  }
+
+  onTapAddTask() {
+    taskListNavigator.openTaskAddPage(const TaskAddInitialParams(), fetchTasks);
   }
 }

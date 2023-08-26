@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http/http.dart';
 import 'package:mobileapp/data/rest_api_tasks_repository.dart';
 import 'package:mobileapp/domain/repository/task_repository.dart';
 import 'package:mobileapp/navigation/app_navigator.dart';
 import 'package:mobileapp/network/network_repository.dart';
+import 'package:mobileapp/ui/task_add/task_add_cubit.dart';
+import 'package:mobileapp/ui/task_add/task_add_initial_params.dart';
+import 'package:mobileapp/ui/task_add/task_add_navigation.dart';
 import 'package:mobileapp/ui/task_detail/task_detail_cubit.dart';
 import 'package:mobileapp/ui/task_detail/task_detail_initial_params.dart';
 import 'package:mobileapp/ui/task_list/task_list_cubit.dart';
@@ -18,12 +21,15 @@ void main() {
   getIt.registerSingleton<NetworkRepository>(NetworkRepository());
   getIt.registerSingleton<TaskRepository>(RestApiTaskRepository(getIt()));
   getIt.registerSingleton<AppNavigator>(AppNavigator());
-
   getIt.registerSingleton<TaskListNavigator>(TaskListNavigator(getIt()));
+  getIt.registerSingleton<TaskkAddNavigator>(TaskkAddNavigator(getIt()));
+
   getIt.registerFactoryParam<TaskListCubit, TaskListInitialParams, dynamic>(
       (params, _) => TaskListCubit(getIt(), getIt(), params)..fetchTasks());
   getIt.registerFactoryParam<TaskDetailsCubit, TaskDetailIntialParams, dynamic>(
       (params, _) => TaskDetailsCubit(params));
+  getIt.registerFactoryParam<TaskAddCubit, TaskAddInitialParams, dynamic>(
+      (params, _) => TaskAddCubit(getIt(), params, getIt(), getIt()));
   runApp(const MyApp());
 }
 

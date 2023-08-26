@@ -24,6 +24,12 @@ class _TaskListScreenState extends State<TaskListScreen> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    taskListCubit.close();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -36,8 +42,12 @@ class _TaskListScreenState extends State<TaskListScreen> {
           listener: (context, state) {
             state as TaskListState;
             if (state.isTaskDeleted ?? false) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Task Succesfully Deleted")));
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  backgroundColor: AppTheme.primaryColor,
+                  content: Text(
+                    "Task Succesfully Deleted",
+                    style: TextStyle(color: AppTheme.colorWhite),
+                  )));
             }
           },
           builder: (context, state) {
@@ -64,6 +74,11 @@ class _TaskListScreenState extends State<TaskListScreen> {
                       );
           },
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => taskListCubit.onTapAddTask(),
+        backgroundColor: AppTheme.primaryColor,
+        child: const Icon(Icons.add_task_rounded),
       ),
     );
   }
