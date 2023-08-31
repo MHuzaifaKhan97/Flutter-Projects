@@ -1,8 +1,11 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:app_settings/app_settings.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_push_notifications/message_screen.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class NotificationServices {
@@ -43,16 +46,26 @@ class NotificationServices {
 
     await _flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
-      onDidReceiveNotificationResponse: (payload) {},
+      onDidReceiveNotificationResponse: (payload) {
+        handleMessage(context, message);
+      },
     );
   }
 
   void firebaseInit(BuildContext context) {
     FirebaseMessaging.onMessage.listen((message) {
-      print(message.notification?.title?.toString());
-      print(message.notification?.body?.toString());
-      initLocalNotifications(context, message);
-      showNotification(message);
+      if (kDebugMode) {
+        print(message.notification?.title?.toString());
+        print(message.notification?.body?.toString());
+        print(message.data.toString());
+        print(message.data["type"]);
+      }
+      if (Platform.isAndroid) {
+        initLocalNotifications(context, message);
+        showNotification(message);
+      } else {
+        showNotification(message);
+      }
     });
   }
 
@@ -97,5 +110,32 @@ class NotificationServices {
       // event.toString();
       print("New Token $event");
     });
+  }
+
+  Future<void> setupInteractMessage(BuildContext context) async {
+    // When app is terminated
+    RemoteMessage? initialMessage =
+        await FirebaseMessaging.instance.getInitialMessage();
+    if (initialMessage != null) {
+      handleMessage(context, initialMessage);
+    }
+
+    // When app is in background
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      handleMessage(context, message);
+    });
+  }
+
+  void handleMessage(BuildContext context, RemoteMessage message) {
+    print(message.data);
+    print(message.data['type']);
+    if (message.data['type'] == "chat") {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (_) => MessageScreen(
+                    id: message.data['id'],
+                  )));
+    }
   }
 }

@@ -16,6 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // notificationServices.isTokenRefresh();
     notificationServices.requestNotificationPermission();
     notificationServices.firebaseInit(context);
+    notificationServices.setupInteractMessage(context);
     notificationServices
         .getDeviceToken()
         .then((token) => print("FCM Token: $token"));
