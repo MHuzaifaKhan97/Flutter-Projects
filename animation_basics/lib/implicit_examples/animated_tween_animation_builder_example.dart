@@ -19,6 +19,7 @@ class PulsatingCircleAnimation extends StatelessWidget {
             return Container(
               width: size,
               height: size,
+              alignment: Alignment.center,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.blue,
@@ -33,7 +34,10 @@ class PulsatingCircleAnimation extends StatelessWidget {
               child: widget,
             );
           },
-          child: const Text("Hello World"),
+          child: const Text(
+            "Hello World",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
         ),
       ),
     );
