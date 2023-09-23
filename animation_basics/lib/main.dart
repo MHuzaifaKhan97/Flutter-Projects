@@ -1,4 +1,4 @@
-import 'package:animation_basics/page_route_builder_animation/splash_animation.dart';
+import 'package:animation_basics/custom_painter_example/bouncing_ball_animation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,6 +16,6 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const SplashAnimation());
+        home: const BouncingBallAnimation());
   }
 }
