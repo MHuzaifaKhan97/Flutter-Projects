@@ -1,16 +1,15 @@
-# animation_basics
+# Animation with Flutter
 
-A new Flutter project.
+## Implicit Animations:
+### - Easy to use built in flutter widgets
 
-## Getting Started
+## Explicit Animations: 
+### - Get controlled over your animations
 
-This project is a starting point for a Flutter application.
+## Page Transitions:
+### - Navigation from 1 page to another without your users feeling it
 
-A few resources to get you started if this is your first Flutter project:
+## Custom Painters:
+### - Create custom graphics and animations by painting onto a widget’s canvas
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
