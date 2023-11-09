@@ -1,7 +1,7 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:bottom_bar_matu/bottom_bar/bottom_bar_bubble.dart';
 import 'package:bottom_bar_matu/bottom_bar_matu.dart';
 import 'package:fashion_ecommerce_app/screens/home_screen.dart';
+import 'package:fashion_ecommerce_app/screens/search_screen.dart';
 import 'package:fashion_ecommerce_app/utils/global_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
@@ -15,6 +15,35 @@ class MainWrapper extends StatefulWidget {
 
 class _MainWrapperState extends State<MainWrapper> {
   int _index = 0;
+  bool isSearchActive = false;
+  List<Widget> pages = [
+    const HomeScreen(),
+    const SearchScreen(),
+    const Scaffold(
+      body: Center(
+        child: Text(
+          "Explore Screen",
+          style: TextStyle(fontSize: 30, color: Colors.black),
+        ),
+      ),
+    ),
+    const Scaffold(
+      body: Center(
+        child: Text(
+          "Setting Screen",
+          style: TextStyle(fontSize: 30, color: Colors.black),
+        ),
+      ),
+    ),
+    const Scaffold(
+      body: Center(
+        child: Text(
+          "Mail Screen",
+          style: TextStyle(fontSize: 30, color: Colors.black),
+        ),
+      ),
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,21 +58,45 @@ class _MainWrapperState extends State<MainWrapper> {
               Icons.menu,
               color: Colors.black,
             )),
-        title: FadeIn(
-          child: const Text(
-            "Home",
-            style: TextStyle(
-                color: Colors.black, fontSize: 18, fontWeight: FontWeight.w500),
-          ),
-        ),
+        title: isSearchActive
+            ? FadeIn(
+                delay: const Duration(milliseconds: 300),
+                child: const Text(
+                  "Search",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500),
+                ),
+              )
+            : FadeIn(
+                delay: const Duration(milliseconds: 300),
+                child: const Text(
+                  "Home",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500),
+                ),
+              ),
         actions: [
           IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                LineIcons.search,
-                color: Colors.black,
-                size: 30,
-              )),
+              onPressed: () {
+                setState(() {
+                  isSearchActive = !isSearchActive;
+                });
+              },
+              icon: isSearchActive
+                  ? const Icon(
+                      LineIcons.searchMinus,
+                      color: Colors.black,
+                      size: 30,
+                    )
+                  : const Icon(
+                      LineIcons.search,
+                      color: Colors.black,
+                      size: 30,
+                    )),
           IconButton(
               onPressed: () {},
               icon: const Icon(
@@ -53,7 +106,7 @@ class _MainWrapperState extends State<MainWrapper> {
               ))
         ],
       ),
-      body: const HomeScreen(),
+      body: isSearchActive ? const SearchScreen() : pages[_index],
       bottomNavigationBar: BottomBarBubble(
         color: primaryColor,
         selectedIndex: _index,
@@ -66,6 +119,7 @@ class _MainWrapperState extends State<MainWrapper> {
         ],
         onSelect: (index) {
           _index = index;
+          setState(() {});
         },
       ),
     );
