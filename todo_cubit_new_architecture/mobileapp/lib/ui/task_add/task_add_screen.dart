@@ -69,7 +69,8 @@ class _TaskAddScreenState extends State<TaskAddScreen> {
                     ),
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: AppTheme.primaryColor),
+                            // backgroundColor: AppTheme.primaryColor,
+                            ),
                         onPressed: () => taskAddCubit.initialParams.isEdit
                             ? taskAddCubit.onTapEditTask()
                             : taskAddCubit.onTapAddTask(),

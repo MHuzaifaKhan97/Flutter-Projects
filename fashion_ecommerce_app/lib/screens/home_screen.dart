@@ -33,210 +33,207 @@ class _HomeScreenState extends State<HomeScreen> {
     var theme = Theme.of(context).textTheme;
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SafeArea(
-        child: SizedBox(
-          width: size.width,
-          height: size.height,
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Top Header Text
-                FadeInUp(
-                  duration: const Duration(milliseconds: 300),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        RichText(
-                          text: TextSpan(
-                              text: "Find your ",
-                              style: theme.headlineLarge,
-                              children: [
-                                TextSpan(
-                                    text: "Style",
-                                    style: theme.headlineLarge?.copyWith(
-                                      color: primaryColor,
-                                      fontSize: 45,
-                                      fontWeight: FontWeight.bold,
-                                    ))
-                              ]),
-                        ),
-                        RichText(
-                          text: const TextSpan(
-                              text: "Be more beautiful with our ",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              children: [
-                                TextSpan(
-                                    text: "Suggesstions",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    )),
-                              ]),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-
-                // Categories
-                FadeInUp(
-                  duration: const Duration(milliseconds: 450),
-                  child: Container(
-                    margin: const EdgeInsets.only(top: 8),
-                    width: size.width,
-                    height: size.height * 0.14,
-                    child: ListView.builder(
-                        itemCount: categories.length,
-                        scrollDirection: Axis.horizontal,
-                        physics: const BouncingScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          CategoriesModel category = categories[index];
-                          return Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Column(
-                              children: [
-                                CircleAvatar(
-                                  radius: 35,
-                                  backgroundImage:
-                                      AssetImage(category.imageUrl),
-                                ),
-                                SizedBox(
-                                  height: size.height * 0.008,
-                                ),
-                                Text(
-                                  category.title,
-                                  style: theme.displayMedium,
-                                )
-                              ],
+      body: SizedBox(
+        width: size.width,
+        height: size.height,
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Top Header Text
+              FadeInUp(
+                duration: const Duration(milliseconds: 300),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      RichText(
+                        text: TextSpan(
+                            text: "Find your ",
+                            style: theme.headlineLarge,
+                            children: [
+                              TextSpan(
+                                  text: "Style",
+                                  style: theme.headlineLarge?.copyWith(
+                                    color: primaryColor,
+                                    fontSize: 45,
+                                    fontWeight: FontWeight.bold,
+                                  ))
+                            ]),
+                      ),
+                      RichText(
+                        text: const TextSpan(
+                            text: "Be more beautiful with our ",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
                             ),
-                          );
-                        }),
+                            children: [
+                              TextSpan(
+                                  text: "Suggesstions",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  )),
+                            ]),
+                      ),
+                    ],
                   ),
                 ),
+              ),
 
-                // Body
-                FadeInUp(
-                  duration: const Duration(milliseconds: 550),
-                  child: Container(
-                    margin: const EdgeInsets.only(top: 12),
-                    width: size.width,
-                    height: size.height * 0.45,
-                    child: PageView.builder(
-                      controller: _controller,
+              // Categories
+              FadeInUp(
+                duration: const Duration(milliseconds: 450),
+                child: Container(
+                  margin: const EdgeInsets.only(top: 8),
+                  width: size.width,
+                  height: size.height * 0.14,
+                  child: ListView.builder(
+                      itemCount: categories.length,
+                      scrollDirection: Axis.horizontal,
                       physics: const BouncingScrollPhysics(),
-                      itemCount: mainList.length,
                       itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {},
-                          child: view(index, theme, size),
-                        );
-                        // BaseModel baseModel = mainList[index];
-                        // return CardWidget(
-                        //     size: size, baseModel: baseModel, theme: theme);
-                      },
-                    ),
-                  ),
-                ),
-
-                // Most Popular Text
-                FadeInUp(
-                  delay: const Duration(microseconds: 650),
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Most Popular",
-                          style: theme.headlineSmall,
-                        ),
-                        Text(
-                          "See all",
-                          style: theme.headlineMedium,
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-
-                // Most Popular Content
-                FadeInUp(
-                  delay: const Duration(milliseconds: 750),
-                  child: SizedBox(
-                    width: size.width,
-                    height: size.height * 0.44,
-                    child: GridView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: mainList.length,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              childAspectRatio: 0.63, crossAxisCount: 2),
-                      itemBuilder: (context, index) {
-                        BaseModel baseModel = mainList[index];
-                        return GestureDetector(
-                          onTap: () {},
+                        CategoriesModel category = categories[index];
+                        return Padding(
+                          padding: const EdgeInsets.all(10),
                           child: Column(
                             children: [
-                              Container(
-                                width: size.width * 0.5,
-                                height: size.height * 0.28,
-                                margin: const EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(3),
-                                    image: DecorationImage(
-                                        image: AssetImage(baseModel.imageUrl),
-                                        fit: BoxFit.cover),
-                                    boxShadow: const [
-                                      BoxShadow(
-                                        offset: Offset(0, 4),
-                                        blurRadius: 4,
-                                        color: Color.fromARGB(61, 0, 0, 0),
-                                      ),
-                                    ]),
+                              CircleAvatar(
+                                radius: 35,
+                                backgroundImage: AssetImage(category.imageUrl),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 2),
-                                child: Text(
-                                  baseModel.name,
-                                  style: theme.headlineSmall,
-                                ),
+                              SizedBox(
+                                height: size.height * 0.008,
                               ),
-                              RichText(
-                                text: TextSpan(
-                                    text: "\$ ",
-                                    style: theme.headlineMedium?.copyWith(
-                                      color: primaryColor,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    children: [
-                                      TextSpan(
-                                          text: baseModel.price.toString(),
-                                          style: theme.headlineMedium?.copyWith(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w600,
-                                          ))
-                                    ]),
-                              ),
+                              Text(
+                                category.title,
+                                style: theme.displayMedium,
+                              )
                             ],
                           ),
                         );
-                      },
-                    ),
+                      }),
+                ),
+              ),
+
+              // Body
+              FadeInUp(
+                duration: const Duration(milliseconds: 550),
+                child: Container(
+                  margin: const EdgeInsets.only(top: 12),
+                  width: size.width,
+                  height: size.height * 0.45,
+                  child: PageView.builder(
+                    controller: _controller,
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: mainList.length,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {},
+                        child: view(index, theme, size),
+                      );
+                      // BaseModel baseModel = mainList[index];
+                      // return CardWidget(
+                      //     size: size, baseModel: baseModel, theme: theme);
+                    },
                   ),
-                )
-              ],
-            ),
+                ),
+              ),
+
+              // Most Popular Text
+              FadeInUp(
+                delay: const Duration(microseconds: 650),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Most Popular",
+                        style: theme.headlineSmall,
+                      ),
+                      Text(
+                        "See all",
+                        style: theme.headlineMedium,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+
+              // Most Popular Content
+              FadeInUp(
+                delay: const Duration(milliseconds: 750),
+                child: SizedBox(
+                  width: size.width,
+                  height: size.height * 0.44,
+                  child: GridView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: mainList.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            childAspectRatio: 0.63, crossAxisCount: 2),
+                    itemBuilder: (context, index) {
+                      BaseModel baseModel = mainList[index];
+                      return GestureDetector(
+                        onTap: () {},
+                        child: Column(
+                          children: [
+                            Container(
+                              width: size.width * 0.5,
+                              height: size.height * 0.28,
+                              margin: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(3),
+                                  image: DecorationImage(
+                                      image: AssetImage(baseModel.imageUrl),
+                                      fit: BoxFit.cover),
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      offset: Offset(0, 4),
+                                      blurRadius: 4,
+                                      color: Color.fromARGB(61, 0, 0, 0),
+                                    ),
+                                  ]),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 2),
+                              child: Text(
+                                baseModel.name,
+                                style: theme.headlineSmall,
+                              ),
+                            ),
+                            RichText(
+                              text: TextSpan(
+                                  text: "\$ ",
+                                  style: theme.headlineMedium?.copyWith(
+                                    color: primaryColor,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                        text: baseModel.price.toString(),
+                                        style: theme.headlineMedium?.copyWith(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w600,
+                                        ))
+                                  ]),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              )
+            ],
           ),
         ),
       ),

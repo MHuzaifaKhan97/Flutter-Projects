@@ -1,5 +1,6 @@
 import 'package:fashion_ecommerce_app/screens/home_screen.dart';
 import 'package:fashion_ecommerce_app/utils/app_theme.dart';
+import 'package:fashion_ecommerce_app/widgets/main_wrapper.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Fashion E-Commerce App UI',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.appTheme,
-      home: const HomeScreen(),
+      home: const MainWrapper(),
     );
   }
 }
