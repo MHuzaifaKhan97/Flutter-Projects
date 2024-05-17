@@ -8,4 +8,5 @@
 ### - Flutter & Firebase Push Notifications
 ### - Posting App (Bloc & Firebase)
 ### - Fashion E-Commerce App 
+### - Wallet App with Card Animations
    
