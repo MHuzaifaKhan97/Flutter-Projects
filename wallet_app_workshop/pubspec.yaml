@@ -1,0 +1,55 @@
+name: wallet_app_workshop
+description: Workshop for a minimalistic, animated wallet app with made with Flutter
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.1.0 <4.0.0'
+
+dependencies:
+  cupertino_icons: ^1.0.2
+  flutter:
+    sdk: flutter
+  font_awesome_flutter: ^10.5.0
+  widgetbook: ^3.2.0
+
+dev_dependencies:
+  flutter_launcher_icons: ^0.13.1
+  flutter_lints: ^2.0.0
+  flutter_test:
+    sdk: flutter
+  very_good_analysis: ^5.0.0+1
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/icons/
+  fonts:
+    - family: Raleway
+      fonts:
+        - asset: assets/fonts/Raleway-Regular.ttf
+        - asset: assets/fonts/Raleway-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Raleway-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Raleway-light.ttf
+          weight: 300
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/app-icon.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "assets/images/app-icon.png"
+    background_color: "#1A1A1A"
+    theme_color: "#1A1A1A"
+  windows:
+    generate: true
+    image_path: "assets/images/app-icon.png"
+    icon_size: 256
+  macos:
+    generate: true
+    image_path: "assets/images/app-icon.png"
